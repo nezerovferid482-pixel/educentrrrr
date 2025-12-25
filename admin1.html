@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<title>Educentr İmtahan Bileti</title>
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+form {
+    background: #fff3e0;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+input, select {
+    padding: 8px;
+    margin: 5px;
+    font-size: 16px;
+    width: calc(50% - 20px);
+}
+button {
+    padding: 12px 25px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #d4af37; /* qızılı */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+button:hover { background-color: #bfa135; }
+
+.bilet {
+    display: none;
+    background: linear-gradient(135deg, #ffd700, #fff8dc);
+    padding: 25px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+}
+.bilet h1, .bilet h2 {
+    text-align: center;
+    margin: 5px 0;
+}
+.bilet table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.bilet th, .bilet td {
+    border: 1px solid #d4af37;
+    padding: 12px;
+    text-align: left;
+}
+.bilet th {
+    background-color: #d4af37;
+    color: white;
+}
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #4b2e0f;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<form id="biletForm">
+    <input type="text" id="ad" placeholder="Ad" required>
+    <input type="text" id="soyad" placeholder="Soyad" required>
+    <select id="sinif" required>
+        <option value="">Sinif seçin</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="yös-01">yös-01</option>
+        <option value="magistr-01">magistr-01</option>
+        <option value="müəllim-01">müəllim-01</option>
+        <option value="dövlət qulluğu-01">dövlət qulluğu-01</option>
+        <option value="işə qəbul-01">işə qəbul-01</option>
+    </select>
+    <input type="text" id="imtahanNovu" placeholder="İmtahan Növü" required>
+    <input type="date" id="imtahanTarixi" required>
+    <input type="time" id="imtahanSaati" required>
+    <input type="text" id="imtahanYeri" placeholder="İmtahan Yeri" required>
+    <select id="imtahanMuddeti" required>
+        <option value="">Müddəti seçin</option>
+        <option value="2 saat">2 saat</option>
+        <option value="3 saat">3 saat</option>
+    </select>
+    <br>
+    <button type="button" onclick="yaratBilet()">Bileti Yarat</button>
+</form>
+
+<div class="bilet" id="biletDiv">
+    <h1>Educentr Təhsil Mərkəzi</h1>
+    <h2>İmtahan Bileti</h2>
+    <table>
+        <tr><th>İş Nömrəsi</th><td id="biletIsNo"></td></tr>
+        <tr><th>Ad</th><td id="biletAd"></td></tr>
+        <tr><th>Soyad</th><td id="biletSoyad"></td></tr>
+        <tr><th>Sinif</th><td id="biletSinif"></td></tr>
+        <tr><th>İmtahan Növü</th><td id="biletNovu"></td></tr>
+        <tr><th>İmtahan Tarixi</th><td id="biletTarix"></td></tr>
+        <tr><th>İmtahan Saatı</th><td id="biletSaat"></td></tr>
+        <tr><th>İmtahan Yeri</th><td id="biletYer"></td></tr>
+        <tr><th>İmtahan Müddəti</th><td id="biletMuddet"></td></tr>
+    </table>
+    <div class="footer">
+        Educentr İmtahan Şöbəsi<br>
+        Bu bileti diqqətlə saxlayın. Uğur qazanmaq üçün hazırlaşın, inan və çalışın!<br>
+        Elm Sənin Yolundur!
+    </div>
+</div>
+
+<script>
+function yaratBilet() {
+    const ad = document.getElementById('ad').value;
+    const soyad = document.getElementById('soyad').value;
+    const sinif = document.getElementById('sinif').value;
+    const imtahanNovu = document.getElementById('imtahanNovu').value;
+    const imtahanTarixi = document.getElementById('imtahanTarixi').value;
+    const imtahanSaati = document.getElementById('imtahanSaati').value;
+    const imtahanYeri = document.getElementById('imtahanYeri').value;
+    const imtahanMuddeti = document.getElementById('imtahanMuddeti').value;
+
+    if(!ad || !soyad || !sinif || !imtahanNovu || !imtahanTarixi || !imtahanSaati || !imtahanYeri || !imtahanMuddeti) {
+        alert("Bütün sahələri doldurun!");
+        return;
+    }
+
+    // Təsadüfi iş nömrəsi 10000-99999
+    const isNo = Math.floor(Math.random() * 90000) + 10000;
+
+    document.getElementById('biletIsNo').innerText = isNo;
+    document.getElementById('biletAd').innerText = ad;
+    document.getElementById('biletSoyad').innerText = soyad;
+    document.getElementById('biletSinif').innerText = sinif;
+    document.getElementById('biletNovu').innerText = imtahanNovu;
+    document.getElementById('biletTarix').innerText = imtahanTarixi;
+    document.getElementById('biletSaat').innerText = imtahanSaati;
+    document.getElementById('biletYer').innerText = imtahanYeri;
+    document.getElementById('biletMuddet').innerText = imtahanMuddeti;
+
+    document.getElementById('biletDiv').style.display = "block";
+}
+</script>
+</body>
+</html>
